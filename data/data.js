@@ -38,6 +38,8 @@ var __editorConfig = {
     },
     renameFile:function(oldName,newName){
         let _project = this.activeProject.files.filter(x=>x.name == oldName);
+        let activeFileNam = this.activeProject.activeFiles.findIndex(x=>x == oldName);
+        this.activeProject.activeFiles[activeFileNam] = newName;
         _project[0].name = newName;
     },
     setContent:function(name,content){

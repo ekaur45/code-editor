@@ -15,8 +15,8 @@ var contextMenuOptions = {
         let fileName = $(opt.$trigger).children().data("file_name");
         openRenameDialog(fileName).then((x)=>{
             if(x.success==true){
-                debugger
                 __editorConfig.renameFile(fileName,x.name);
+                if(fileName == activeTab) activeTab == x.name;
                 RenderFileList();
                 RenderTabs();
             }
