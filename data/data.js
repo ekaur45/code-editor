@@ -35,6 +35,10 @@ var __editorConfig = {
     addActiveFile:function(fileName){
         if(!(this.activeProject.activeFiles)) this.activeProject.activeFiles = [];
         this.activeProject.activeFiles.push(fileName)
+    },
+    renameFile:function(oldName,newName){
+        let _project = this.activeProject.files.filter(x=>x.name == oldName);
+        _project[0].name = newName;
     }
 
 }

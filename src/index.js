@@ -8,6 +8,22 @@ __editorConfig.addActiveFile("index.js");
 var activeTab = __editorConfig.activeProject.files[0].name;
 var codeeditor = null;
 var modal2 = document.getElementById("remove-f");
+var contextMenuOptions = {
+    foo: {name: "Rename", callback: function(key, opt){
+        let fileName = $(opt.$trigger).children().data("file_name");
+        openRenameDialog(fileName).then((x)=>{
+            if(x.success==true){
+                debugger
+                __editorConfig.renameFile(fileName,x.name);
+                RenderFileList();
+            }
+        })
+    }},
+    bar: {name: "Delete", callback: function(key, opt){
+        let fileName = $(opt.$trigger).children().data("file_name");
+     }}
+}
+
 //#endregion
 $(document).ready(__init);
 function __init() {
@@ -24,6 +40,17 @@ function __init() {
     RenderProjects();
     RenderFileList();
     RenderTabs();
+    
+}
+function __initContextMenu(){
+    
+    $.contextMenu({
+        // define which elements trigger this menu
+        selector: "#file-list li",
+        // define the elements of the menu
+        items: contextMenuOptions
+        // there's more, have a look at the demos and docs...
+    });
 }
 function __restrictions() {
     $(document).on('change keyup', '.required', function (e) {
@@ -123,7 +150,7 @@ function RenderFileList() {
     var html = "";
     if (!(files && files.length)) {
         var html = "";
-        createCodeMirror()
+        createCodeMirror("")
         $("#file-list").html(html);
         return
     }
@@ -133,6 +160,7 @@ function RenderFileList() {
     }
     $("#file-list").html(html);
     AddFileClickListener();
+    __initContextMenu();
   
 }
 function RenderProjects(){
@@ -190,6 +218,34 @@ function myFunction() {
     var element = document.querySelector('.lightmode');
     element.classList.toggle("dark-mode");
 }
+function openRenameDialog(name){
+    debugger
+    $("#rename-file-name").val(name);
+    return new Promise((resolve,reject)=>{
+       $("#rename-f").modal("show");
+       $("#rename-file-confirm-btn").on("click",function(){
+           resolve({success:true,name:$("#rename-file-name").val()})
+           $("#rename-f").modal("hide");
+       })
+       $("#rename-file-cancel-btn").on("click",function(){
+           resolve({success:false,name:$("#rename-file-name").val()})
+           $("#rename-f").modal("hide");
+       })
+    })
+}
+function openDeleteConfirmDialog(){
+    return new Promise((resolve,reject)=>{
+       $("#remove-f").modal("show");
+       $("#delete-cancel-btn").on("click",function(){
+           resolve(true)
+           $("#remove-f").modal("hide");
+       })
+       $("#delete-confirm-btn").on("click",function(){
+           resolve(false)
+           $("#remove-f").modal("hide");
+       })
+    })
+}
 function listeners() {
     $(".dark").click(function () {
         $(".dark").addClass("active");
@@ -200,30 +256,12 @@ function listeners() {
         $(".light").addClass("active");
         $(".dark").removeClass("active");
     });
-    $("#file-list").on('click', function (e) {
-        if (e.target.classList.contains('remove-file')) {
-            var _this = e.target;
-            $("#deleting-file-name").text($(_this).parent().data('file_name'));
-            confirmDialog().then(x => {
-                if (x === true) {
-                    let _fileName = $(_this).parent().data('file_name');
-                    let _files = files.filter(x => x.name == _fileName);
-                    if (_files.length > 0) {
-                        files.splice(files.findIndex(x => x.name == _files[0].name), 1);
-                        let index = activeFiles.findIndex(x => x === _files[0].name);//activeFiles.indexOf(x=>x===$(parent).data("file_name"));
-                        activeFiles.splice(index, 1);
-                        activeTab = activeFiles[0];
-                        RenderTabs();
-                        RenderFileList();
-                    }
-                }
-            })
-        }
-    })
+ 
     $("#myBtn").on("click",function(){
         $("#myModal").show();
     });
     $("#addFileBtn").on("click",function(){
+        $("#add-file-name").val('');
         $("#add-f").show();
     });
     $("#add-file-confirm-btn").on("click",function(){
@@ -231,6 +269,9 @@ function listeners() {
         {
             __editorConfig.addFile($("#add-file-name").val());
             __editorConfig.addActiveFile($("#add-file-name").val());
+            activeTab = $("#add-file-name").val();
+            RenderFileList();
+            RenderTabs();
             $("#add-f").hide();
         }
     });
@@ -238,13 +279,18 @@ function listeners() {
         e.preventDefault();
         var __fileConfig=$(e.target).serializeArray();
         var fileName = __fileConfig.filter(x=>x.name == "name")[0];
-        __editorConfig.addProject(fileName.value);
-        
-        // files.push({name:fileName.value,content:"/* new file*/"})
-        // activeFiles.push(fileName.value);
-        // activeTab = fileName.value;
+        __editorConfig.addProject({name:fileName.value});
+        __editorConfig.setCurrentProject(fileName.value);
+        RenderProjects();
         RenderFileList();
         RenderTabs();
+        
         $("#myModal").hide();
     });
+    $(".content").on("mouseenter",function(){
+        $(this).addClass("content-hover");
+    })
+    $(".content").on("mouseleave",function(){
+        $(this).removeClass("content-hover");
+    })
 }
