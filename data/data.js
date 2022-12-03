@@ -19,8 +19,8 @@ var __editorConfig = {
         this.activePName = _project[0].name;
         this.activeProject = _project[0];
     },
-    addFile:function(name){
-        this.activeProject.files.push({name,content:""});
+    addFile:function(name,content=""){
+        this.activeProject.files.push({name,content});
     },
     /**
      * 

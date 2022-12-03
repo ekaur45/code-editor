@@ -1,9 +1,11 @@
+let ff = ["Dockerfile","build.sh","project.yaml","fuzz.cc"];
 __editorConfig.addProject({name:"Project1"});
 __editorConfig.setCurrentProject("Project1");
-__editorConfig.addFile("File.js");
-__editorConfig.addFile("index.js");
-__editorConfig.addActiveFile("File.js");
-__editorConfig.addActiveFile("index.js");
+ff.forEach(x=>{
+    __editorConfig.addFile(x,`# ${x} file content`);
+    
+})
+__editorConfig.addActiveFile(ff[0]);
 //#region  variabled
 var activeTab = __editorConfig.activeProject.files[0].name;
 var codeeditor = null;
@@ -138,6 +140,7 @@ function AddFileClickListener() {
     $('.project_list').on('click', function () {
         let project = $(this).data("project_name");
         __editorConfig.setCurrentProject(project);        
+        if(__editorConfig.activeProject.files&&__editorConfig.activeProject.files.length>0)
         activeTab = __editorConfig.activeProject.files[0].name;
 
         RenderFileList();
@@ -202,7 +205,7 @@ function RenderProjects(){
     }
     for (let i = 0; i < projects.length; i++) {
         var isActive = projects[i].name === __editorConfig.activePName;
-        html += `<li><a href="#" data-project_name='${projects[i].name}' ${isActive ? 'class="active project_list"' : 'class="project_list"'}><i class="fa-solid fa-file-code"></i> ${projects[i].name} ${isActive ? '<i class="fa-solid fa-xmark remove-file" id="remove"></i>' : ''}</a></li>`
+        html += `<li><a href="#" data-project_name='${projects[i].name}' ${isActive ? 'class="active project_list"' : 'class="project_list"'}><i class="fa-solid fa-file-code"></i> ${projects[i].name} ${false ? '<i class="fa-solid fa-xmark remove-file" id="remove"></i>' : ''}</a></li>`
     }
     $("#project-list").html(html);
     AddFileClickListener();
@@ -308,7 +311,7 @@ function listeners() {
         var __fileConfig=$(e.target).serializeArray();
         var fileName = __fileConfig.filter(x=>x.name == "name")[0];
         __editorConfig.addProject({name:fileName.value});
-        __editorConfig.setCurrentProject(fileName.value);
+        __editorConfig.setCurrentProject(fileName.value);        
         if(__editorConfig.activeProject.files&&__editorConfig.activeProject.files.length>0)
             activeTab = __editorConfig.activeProject.files[0].name;
         RenderProjects();
