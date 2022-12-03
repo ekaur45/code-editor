@@ -16,7 +16,8 @@ var contextMenuOptions = {
         openRenameDialog(fileName).then((x)=>{
             if(x.success==true){
                 __editorConfig.renameFile(fileName,x.name);
-                if(fileName == activeTab) activeTab == x.name;
+                if(fileName == activeTab) activeTab = x.name;
+                console.log({activeTab});
                 RenderFileList();
                 RenderTabs();
             }
@@ -31,8 +32,8 @@ var contextMenuOptions = {
                     if(__editorConfig.activeProject.files&&__editorConfig.activeProject.files.length>0)
                         activeTab = __editorConfig.activeProject.files[0].name
                 }
-                RenderFileList();
                 RenderTabs();
+                RenderFileList();
             }
         })
      }}
@@ -190,6 +191,7 @@ function RenderFileList() {
         html += `<li><a href="#" data-file_name='${files[i].name}' ${isActive ? 'class="active file_list"' : 'class="file_list"'}><i class="fa-solid fa-file-code"></i> ${files[i].name} ${false ? '<i class="fa-solid fa-xmark remove-file" id="remove"></i>' : ''}</a></li>`
     }
     $("#file-list").html(html);
+    
     AddFileClickListener();
     __initContextMenu();
   
