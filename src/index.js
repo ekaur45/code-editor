@@ -17,7 +17,6 @@ var contextMenuOptions = {
             if(x.success==true){
                 __editorConfig.renameFile(fileName,x.name);
                 if(fileName == activeTab) activeTab = x.name;
-                console.log({activeTab});
                 RenderFileList();
                 RenderTabs();
             }
@@ -25,6 +24,7 @@ var contextMenuOptions = {
     }},
     bar: {name: "Delete", callback: function(key, opt){
         let fileName = $(opt.$trigger).children().data("file_name");
+        console.log({fileName});
         openDeleteConfirmDialog(fileName).then(x=>{
             if(x==true){
                 __editorConfig.deleteFile(fileName);
@@ -266,7 +266,7 @@ function openRenameDialog(name){
     })
 }
 function openDeleteConfirmDialog(n){
-    $("#deleting-file-name").val(n);
+    $("#deleting-file-name").html(n);
     return new Promise((resolve,reject)=>{
        $("#remove-f").modal("show");
        $("#delete-cancel-btn").on("click",function(){
