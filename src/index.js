@@ -16,11 +16,23 @@ var contextMenuOptions = {
                 debugger
                 __editorConfig.renameFile(fileName,x.name);
                 RenderFileList();
+                RenderTabs();
             }
         })
     }},
     bar: {name: "Delete", callback: function(key, opt){
         let fileName = $(opt.$trigger).children().data("file_name");
+        openDeleteConfirmDialog(fileName).then(x=>{
+            if(x==true){
+                __editorConfig.deleteFile(fileName);
+                if(fileName==activeTab){
+                    if(__editorConfig.activeProject.files&&__editorConfig.activeProject.files.length>0)
+                        activeTab = __editorConfig.activeProject.files[0].name
+                }
+                RenderFileList();
+                RenderTabs();
+            }
+        })
      }}
 }
 
@@ -102,8 +114,15 @@ function initCodeEditor1() {
         },
         lineNumbers: true,
         theme: "default",
+        update:function(e,a){
+            console.log({e,a});
+        },
         extraKeys: { "Enter": "newlineAndIndentContinueMarkdownList" }
     });
+    codeeditor.on('change', (editor) => {
+        const text = editor.doc.getValue()
+        __editorConfig.setContent(activeTab,text);
+      });
 }
 
 
@@ -115,6 +134,15 @@ function AddFileClickListener() {
             activeFiles.push(activeTab);
         RenderFileList();
         RenderTabs();
+    });
+    $('.project_list').on('click', function () {
+        let project = $(this).data("project_name");
+        __editorConfig.setCurrentProject(project);        
+        activeTab = __editorConfig.activeProject.files[0].name;
+
+        RenderFileList();
+        RenderTabs();
+        RenderProjects();
     });
     $('.file-fa-xmark').on('click', function () {
         var parent = $(this).parent();
@@ -134,7 +162,7 @@ function RenderTabs() {
             html += `<a href="#" data-file_name='${activeFiles[i]}' ${isActive ? 'class="active file_list"' : 'class="file_list"'}><i class="fa-solid fa-file-code"></i><span>${activeFiles[i]}</span>${true ? '<i class="fa-sharp fa-solid fa-xmark file-fa-xmark" ></i>' : ''}</a>`
         }
         var activeTabFile = __editorConfig.activeProject.files.filter(x => x.name === activeTab);
-        if (activeTabFile) {
+        if (activeTabFile &&activeTabFile.length>0) {
             createCodeMirror(activeTabFile[0].content)
         }
         $("#files-name").html(html);
@@ -156,7 +184,7 @@ function RenderFileList() {
     }
     for (let i = 0; i < files.length; i++) {
         var isActive = files[i].name === activeTab;
-        html += `<li><a href="#" data-file_name='${files[i].name}' ${isActive ? 'class="active file_list"' : 'class="file_list"'}><i class="fa-solid fa-file-code"></i> ${files[i].name} ${isActive ? '<i class="fa-solid fa-xmark remove-file" id="remove"></i>' : ''}</a></li>`
+        html += `<li><a href="#" data-file_name='${files[i].name}' ${isActive ? 'class="active file_list"' : 'class="file_list"'}><i class="fa-solid fa-file-code"></i> ${files[i].name} ${false ? '<i class="fa-solid fa-xmark remove-file" id="remove"></i>' : ''}</a></li>`
     }
     $("#file-list").html(html);
     AddFileClickListener();
@@ -174,7 +202,7 @@ function RenderProjects(){
     }
     for (let i = 0; i < projects.length; i++) {
         var isActive = projects[i].name === __editorConfig.activePName;
-        html += `<li><a href="#" data-file_name='${projects[i].name}' ${isActive ? 'class="active file_list"' : 'class="file_list"'}><i class="fa-solid fa-file-code"></i> ${projects[i].name} ${isActive ? '<i class="fa-solid fa-xmark remove-file" id="remove"></i>' : ''}</a></li>`
+        html += `<li><a href="#" data-project_name='${projects[i].name}' ${isActive ? 'class="active project_list"' : 'class="project_list"'}><i class="fa-solid fa-file-code"></i> ${projects[i].name} ${isActive ? '<i class="fa-solid fa-xmark remove-file" id="remove"></i>' : ''}</a></li>`
     }
     $("#project-list").html(html);
     AddFileClickListener();
@@ -219,7 +247,6 @@ function myFunction() {
     element.classList.toggle("dark-mode");
 }
 function openRenameDialog(name){
-    debugger
     $("#rename-file-name").val(name);
     return new Promise((resolve,reject)=>{
        $("#rename-f").modal("show");
@@ -233,15 +260,16 @@ function openRenameDialog(name){
        })
     })
 }
-function openDeleteConfirmDialog(){
+function openDeleteConfirmDialog(n){
+    $("#deleting-file-name").val(n);
     return new Promise((resolve,reject)=>{
        $("#remove-f").modal("show");
        $("#delete-cancel-btn").on("click",function(){
-           resolve(true)
+           resolve(false)
            $("#remove-f").modal("hide");
        })
        $("#delete-confirm-btn").on("click",function(){
-           resolve(false)
+           resolve(true)
            $("#remove-f").modal("hide");
        })
     })
@@ -281,6 +309,8 @@ function listeners() {
         var fileName = __fileConfig.filter(x=>x.name == "name")[0];
         __editorConfig.addProject({name:fileName.value});
         __editorConfig.setCurrentProject(fileName.value);
+        if(__editorConfig.activeProject.files&&__editorConfig.activeProject.files.length>0)
+            activeTab = __editorConfig.activeProject.files[0].name;
         RenderProjects();
         RenderFileList();
         RenderTabs();

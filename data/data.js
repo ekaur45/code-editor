@@ -39,6 +39,19 @@ var __editorConfig = {
     renameFile:function(oldName,newName){
         let _project = this.activeProject.files.filter(x=>x.name == oldName);
         _project[0].name = newName;
+    },
+    setContent:function(name,content){
+        let __a = this.activeProject.files.filter(x=>x.name == name);
+        if(__a&&__a.length>0)
+            __a[0].content = content;
+    },
+    deleteFile:function(name){
+        
+        let index = this.activeProject.files.findIndex(x=>x.name == name);
+        this.activeProject.files.splice(index,1);
+        let index1 = this.activeProject.activeFiles.findIndex(x=>x == name);
+        this.activeProject.activeFiles.splice(index1,1);
+
     }
 
 }
