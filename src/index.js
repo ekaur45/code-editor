@@ -293,4 +293,10 @@ function listeners() {
     $(".content").on("mouseleave",function(){
         $(this).removeClass("content-hover");
     })
+    $("#files-name").on("mouseenter",function(){
+        $(this).addClass("content-hover");
+    })
+    $("#files-name").on("mouseleave",function(){
+        $(this).removeClass("content-hover");
+    })
 }
