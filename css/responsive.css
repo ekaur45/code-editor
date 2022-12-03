@@ -1,0 +1,181 @@
+
+@media screen and (min-width: 1399px) and (max-width: 1496px) {
+	.btn-name a {
+	  font-size: 13px;
+	  padding: 10px 14px;
+	}
+
+}
+
+
+
+@media screen and (min-width: 1199px) and (max-width: 1399px) {
+
+.footer {
+  padding: 16px 10px;
+}
+
+.light-switch a {
+  padding: 8px 13px;
+}
+
+.social-icon {
+  gap: 15px;
+}
+
+.btn-name a {
+  font-size: 12px;
+  padding: 10px 10px;
+}
+
+
+}
+
+
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+
+.sidebar {
+  width: 21%;
+}
+
+.footer {
+  padding: 16px 5px;
+}
+
+.light-switch a {
+  padding: 8px 13px;
+}
+
+.social-icon {
+  gap: 15px;
+}
+
+.btn-name a {
+	font-size: 10px;
+  padding: 10px 5px;
+	}
+
+}
+
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+ 
+.lightmode {
+  flex-direction: column;
+}
+
+.lightmode> div {
+  width: 100%;
+}
+
+.sidebar {
+	height: auto;
+}
+
+.code-left,.code-right {
+	padding-bottom: 130px;
+
+}
+
+.code-all {
+	height: auto;
+}
+
+.m-none {
+	display: none;
+}
+
+.dk-none {
+	display: block;
+	position: fixed;
+	bottom: 0;
+	padding: 16px 150px;
+}
+
+}
+
+
+@media screen and (max-width: 767px) {
+  
+.lightmode {
+  flex-direction: column;
+}
+
+.lightmode> div {
+  width: 100%;
+}
+
+.sidebar {
+	height: auto;
+}
+
+.code-left,.code-right {
+padding-bottom: 130px;
+
+}
+
+.code-all {
+	height: auto;
+}
+
+.m-none {
+	display: none;
+}
+
+.dk-none {
+	display: block;
+	position: fixed;
+	bottom: 0;
+}
+
+}
+
+
+@media screen and (max-width: 575px) {
+
+.btn-name a {
+  font-size: 11px;
+  padding: 10px 9px;
+  margin-left: 3px;
+
+  }
+
+.btn-name a:last-child i {
+  margin-right: 5px;
+}
+
+.btn-name a:last-child {
+  padding: 10px 10px 10px 10px;
+}
+
+
+
+}
+
+
+@media screen and (max-width: 410px) {
+ 
+.python-area a {
+	width: 350px;
+	
+}
+
+.btn-name a {
+  font-size: 10px;
+  padding: 10px 8px;
+  margin-left: 3px;
+
+  }
+
+.btn-name a:last-child i {
+  margin-right: 5px;
+}
+
+.btn-name a:last-child {
+  padding: 10px 10px 10px 10px;
+}
+
+
+
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<title>code editor</title>
+
+	<!-- icon -->
+	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.1/css/all.css">
+	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.1/css/sharp-solid.css">
+
+	<!-- code -->
+	<link rel='stylesheet' href='https://unpkg.com/codemirror@5.32.0/lib/codemirror.css'>
+	<link rel='stylesheet' href='https://unpkg.com/codemirror@5.32.0/theme/solarized.css'>
+
+	<!-- <link rel="stylesheet" href="jquery-ui.css"> -->
+	<!-- style -->
+	<link rel="stylesheet" type="text/css" href="css/multi-select.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+	<div class="lightmode">
+		<div class="sidebar">
+			<div class="logo">
+				<h2>LOGO</h2>
+			</div>
+			<div class="accordion-wrapper">
+				<div class="head">
+					<h3>FILES</h3>
+					<p id="addFileBtn"><i class="fa-sharp fa-solid fa-plus" ></i></p>
+				</div>
+				<div class="content">
+					<ul id="file-list">					
+					</ul>
+					
+					<!-- The Modal -->
+					<div id="remove-f" class="modal">
+
+						<!-- Modal content -->
+						<div class="modal-content">
+							<div class="m-head">
+								<h2>Deleting a file</h2>
+							</div>
+							<div class="m-body">
+								<p>Are you sure want to remove &nbsp;<span id="deleting-file-name">#filename#</span>&nbsp; file?</p>
+
+							</div>
+							<div class="m-foot">
+								<button class="close2">Cancel</button><button type="submit"
+									class="close3 remove-btn">Remove</button>
+							</div>
+						</div>
+
+					</div>
+					<div id="add-f" class="modal">
+
+						<!-- Modal content -->
+						<div class="modal-content">
+							<div class="m-head">
+								<h2>Add a file</h2>
+							</div>
+							<div class="m-body">
+								<input class="add-file-input" id="add-file-name" placeholder="file name"/>
+
+							</div>
+							<div class="m-foot">
+								<button class="close2">Cancel</button><button type="submit"
+									class="close3 remove-btn" id="add-file-confirm-btn">Add</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="head">
+					<h3>PROJECT LIST</h3>
+					<p id="myBtn"><i class="fa-sharp fa-solid fa-plus"></i></p>
+				</div>
+
+				<div class="content">
+					<ul id="project-list">
+					</ul>
+				</div>
+			</div>
+			<!-- <div id="accordion">
+				<div class="head">
+					<h3>FILES</h3>
+					<p><i class="fa-sharp fa-solid fa-plus" id="myBtn"></i></p>
+				</div>
+
+				<div class="content">
+					<ul id="file-list">
+						<li><a href="#"><i class="fa-brands fa-docker"></i> Dockerfile</a></li>
+						<li><a href="#" class="active"><i class="fa-solid fa-file-code"></i> build.sh <i
+									class="fa-solid fa-xmark" id="remove"></i></a></li>
+
+						<li><a href="#"><i class="fa-solid fa-file-code"></i> project.yaml</a></li>
+						<li><a href="#"><i class="fa-solid fa-closed-captioning"></i> fuzz.cc</a></li>
+					</ul>
+
+
+				</div>
+
+				<div class="head">
+					<h3>PROJECT LIST</h3>
+					<p><i class="fa-sharp fa-solid fa-plus"></i></p>
+				</div>
+
+				<div class="content">
+					<ul>
+						<li><a href="#">Project_1</a></li>
+						<li><a href="#" class="active">Project_2</a></li>
+						<li><a href="#">Project_3</a></li>
+						<li><a href="#">Project_4</a></li>
+						<li><a href="#">Project_5</a></li>
+					</ul>
+				</div>
+			</div> -->
+
+			<!-- The Modal -->
+			<div id="myModal" class="modal">
+
+				<!-- Modal content -->
+				<div class="modal-content">
+					<div class="m-head">
+						<h2>New Project</h2>
+					</div>
+					<form id="createFileForm">
+						<div class="m-body">
+							<div class="f-input">
+								<label>Name</label>
+								<input type="text" name="name" class="required">
+
+							</div>
+
+							<div class="f-input">
+								<label for="language">Select Languages</label>
+								<select id="language" name="language" multiple class="required">
+									<option value="c">c</option>
+									<option value="c++">c++</option>
+									<option value="Go">Go</option>
+									<option value="Java">Java</option>
+									<option value="Javascript">Javascript</option>
+									<option value="Python">Python</option>
+									<option value="Rust">Rust</option>
+									<option value="Swift">Swift</option>
+
+								</select>
+							</div>
+
+							<div class="f-input">
+								<label for="sanitise">Select Sanitizers</label>
+								<select id="sanitise" name="sanitise" multiple class="required">
+									<option value="Adress">Adress</option>
+									<option value="Memory">Memory</option>
+									<option value="Undefined">Undefined</option>
+
+								</select>
+							</div>
+
+							<div class="f-input">
+								<label>Architectures</label>
+								<div class="form-group">
+									<input type="checkbox" id="arc1">
+									<label for="arc1">x86_64 </label>
+								</div>
+								<div class="form-group">
+									<input type="checkbox" id="arc2">
+									<label for="arc2">i386</label>
+								</div>
+
+							</div>
+
+
+						</div>
+						<div class="m-foot">
+							<button class="close">Cancel</button><button type="submit"
+								class="close1 confirm toggle-disabled" disabled>Confirm</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+
+			<div class="footer m-none">
+				<div class="light-switch">
+					<a href="#" class="light active" onclick="myFunction()"><i
+							class="fa-sharp fa-solid fa-sun-bright"></i> Light</a><a href="#" class="dark"
+						onclick="myFunction()"><i class="fa-solid fa-moon"></i> Dark</a>
+						<div class="bg-light-switch"></div>
+				</div>
+
+				<div class="social-icon">
+					<a href="#"><i class="fa-brands fa-discord"></i></a>
+					<a href="#" class="mid-s"><i class="fa-brands fa-github-alt"></i></a>
+					<a href="#"><i class="fa-brands fa-linkedin"></i></a>
+				</div>
+			</div>
+		</div>
+
+		<div class="code-left">
+
+			<div class="files-name" id="files-name">
+				<!-- <a href="#" class="active"><i class="fa-solid fa-file-code"></i><span>build.sh</span><i class="fa-sharp fa-solid fa-xmark"></i></a>
+
+				<a href="#"><i class="fa-brands fa-docker"></i> Dockerfile</a> -->
+			</div>
+
+			<div class="code-all-center">
+				<textarea id="code">
+				</textarea>
+			</div>
+
+		</div>
+
+
+
+		<div class="code-right" id="code-right-container">
+			<div class="btn-name">
+				<div>
+					<a href="#">Build base images</a>
+					<a href="#">Build image</a>
+					<a href="#">Build fuzzers</a>
+
+					<a href="#"><i class="fa-solid fa-play"></i> Run fuzzers</a>
+				</div>
+
+			</div>
+
+			<div class="code-all" id="code-all-container">
+				<textarea id="code-right">
+	Shadow bytes around the buggy address:
+	OXOC047fff7fbo: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	OXOC047fff7fco: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	OXOC047fff7fdo: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	OXOC047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	OX00047fff7ffo: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=> 	OX00047fff8000: fa fa[fd]fd fa fa fa fa fa fa fa fa fa fa fa fa
+	OXOC047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+	OXOC047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+	OXOC047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+	Ox0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+	Addressable:           00
+	Partially addressable: 01 02 03 04 05 06 07
+	Heap left redzone:         fa 
+	Freed heap region:         fd 
+	Stack left redzone:        f1 
+	Stack mid redzone:         f2 
+	Stack right redzone:       f3 
+	Stack after return:        f5 
+	Stack use after scope:     f8 
+	Global redzone:            f9 
+	Global init order:         f6 
+	Poisoned by user:          f7 
+	Container overflow:        fc 
+	Array cookie:              ac 
+	Intra object redzone:      bb 
+	Asan internal:             fe 
+	Left alloca redzone:       ca 
+	Right alloca redzone:      cb 
+==5011==ABORTING
+				
+				</textarea>
+			</div>
+
+			<div class="python-area" id="python-area-container">
+				<div>
+					<img src="img/Illustration.png" alt="image">
+					<h3>New python release</h3>
+					<p>The mission of the Python Software Foundation is to promote,<br> protect, and advance the Python
+						programming language.</p>
+					<a href="#">See releases</a>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="footer dk-none">
+			<div class="light-switch">
+				<a href="#" class="light active" onclick="myFunction()"><i class="fa-sharp fa-solid fa-sun-bright"></i>
+					Light</a><a href="#" class="dark" onclick="myFunction()"><i class="fa-solid fa-moon"></i> Dark</a>
+					
+			</div>
+
+			<div class="social-icon">
+				<a href="#"><i class="fa-brands fa-discord"></i></a>
+				<a href="#" class="mid-s"><i class="fa-brands fa-github-alt"></i></a>
+				<a href="#"><i class="fa-brands fa-linkedin"></i></a>
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	<script src='https://unpkg.com/codemirror@5.32.0/lib/codemirror.js'></script>
+	<script src='https://unpkg.com/codemirror@5.32.0/mode/javascript/javascript.js'></script>
+	<script src='https://unpkg.com/codemirror@5.32.0/mode/markdown/markdown.js'></script>
+	<!-- multi select -->
+	<script type="text/javascript" src="src/jquery.multi-select.js"></script>
+	<script src="./data/data.js"></script>
+	<script src="./src/index.js"></script>
+
+
+</body>
+
+</html>
