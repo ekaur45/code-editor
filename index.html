@@ -13,7 +13,6 @@
 	<!-- code -->
 	<link rel='stylesheet' href='https://unpkg.com/codemirror@5.32.0/lib/codemirror.css'>
 	<link rel='stylesheet' href='https://unpkg.com/codemirror@5.32.0/theme/solarized.css'>
-
 	<!-- <link rel="stylesheet" href="jquery-ui.css"> -->
 	<!-- style -->
 	<link rel="stylesheet" type="text/css" href="css/multi-select.css">
@@ -40,7 +39,7 @@
 					<div id="remove-f" class="modal">
 
 						<!-- Modal content -->
-						<div class="modal-content">
+						<div class="modal-content modal-dialog">
 							<div class="m-head">
 								<h2>Deleting a file</h2>
 							</div>
@@ -49,8 +48,8 @@
 
 							</div>
 							<div class="m-foot">
-								<button class="close2">Cancel</button><button type="submit"
-									class="close3 remove-btn">Remove</button>
+								<button class="close2" id="delete-cancel-btn">Cancel</button>
+								<button type="submit" id="delete-confirm-btn" class="close3 remove-btn">Remove</button>
 							</div>
 						</div>
 
@@ -84,41 +83,7 @@
 					</ul>
 				</div>
 			</div>
-			<!-- <div id="accordion">
-				<div class="head">
-					<h3>FILES</h3>
-					<p><i class="fa-sharp fa-solid fa-plus" id="myBtn"></i></p>
-				</div>
-
-				<div class="content">
-					<ul id="file-list">
-						<li><a href="#"><i class="fa-brands fa-docker"></i> Dockerfile</a></li>
-						<li><a href="#" class="active"><i class="fa-solid fa-file-code"></i> build.sh <i
-									class="fa-solid fa-xmark" id="remove"></i></a></li>
-
-						<li><a href="#"><i class="fa-solid fa-file-code"></i> project.yaml</a></li>
-						<li><a href="#"><i class="fa-solid fa-closed-captioning"></i> fuzz.cc</a></li>
-					</ul>
-
-
-				</div>
-
-				<div class="head">
-					<h3>PROJECT LIST</h3>
-					<p><i class="fa-sharp fa-solid fa-plus"></i></p>
-				</div>
-
-				<div class="content">
-					<ul>
-						<li><a href="#">Project_1</a></li>
-						<li><a href="#" class="active">Project_2</a></li>
-						<li><a href="#">Project_3</a></li>
-						<li><a href="#">Project_4</a></li>
-						<li><a href="#">Project_5</a></li>
-					</ul>
-				</div>
-			</div> -->
-
+		
 			<!-- The Modal -->
 			<div id="myModal" class="modal">
 
@@ -294,7 +259,23 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 
 	</div>
 
+	<div id="rename-f" class="modal">
 
+		<!-- Modal content -->
+		<div class="modal-content modal-dialog">
+			<div class="m-head">
+				<h2>Add a file</h2>
+			</div>
+			<div class="m-body">
+				<input class="add-file-input" id="rename-file-name" placeholder="file name"/>
+
+			</div>
+			<div class="m-foot">
+				<button  id="rename-file-cancel-btn">Cancel</button><button type="submit"
+					class="close3 remove-btn" id="rename-file-confirm-btn">Rename</button>
+			</div>
+		</div>
+	</div>
 
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -302,10 +283,15 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 	<script src='https://unpkg.com/codemirror@5.32.0/lib/codemirror.js'></script>
 	<script src='https://unpkg.com/codemirror@5.32.0/mode/javascript/javascript.js'></script>
 	<script src='https://unpkg.com/codemirror@5.32.0/mode/markdown/markdown.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 	<!-- multi select -->
 	<script type="text/javascript" src="src/jquery.multi-select.js"></script>
-	<script src="./data/data.js"></script>
-	<script src="./src/index.js"></script>
+	<script src="data/data.js"></script>
+	<script src="src/index.js"></script>
 
 
 </body>
