@@ -18,6 +18,47 @@
 	<!-- style -->
 	<link rel="stylesheet" type="text/css" href="css/multi-select.css">
 	<link rel="stylesheet" href="css/style.css">
+	<style>
+        .grid {
+            display: grid;
+            grid-template-rows: 1fr 10px 1fr;
+            grid-template-columns: 1fr 10px 1fr;
+        }
+
+        .gutter-col {
+            grid-row: 1/-1;
+            cursor: col-resize;
+        }
+
+        .gutter-col-1 {
+            grid-column: 2;
+        }
+
+        .gutter-row {
+            grid-column: 1/-1;
+            cursor: row-resize;
+        }
+
+        .gutter-row-1 {
+            grid-row: 2;
+        }
+
+        .split {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .gutter {
+            background-color: #eee;
+            background-repeat: no-repeat;
+            background-position: 50%;
+        }
+
+        .gutter.gutter-horizontal {
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+            cursor: col-resize;
+        }
+	</style>
 </head>
 
 <body>
@@ -166,7 +207,7 @@
 			</div>
 		</div>
 
-		<div class="code-left">
+		<div class="code-left" id="split-0">
 
 			<div class="files-name" id="files-name">
 				<!-- <a href="#" class="active"><i class="fa-solid fa-file-code"></i><span>build.sh</span><i class="fa-sharp fa-solid fa-xmark"></i></a>
@@ -314,12 +355,20 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/swift/swift.min.js"
 		integrity="sha512-KboFwQ+TWkkbWPaPoADuxTYNLkcFzhckndX0mquRYdRFT6Wn8evoAqpTqTVA9b4ayrH4KjX3WZgwHGHq6l1Ruw=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.6.2/split.min.js" integrity="sha512-to2k78YjoNUq8+hnJS8AwFg/nrLRFLdYYalb18SlcsFRXavCOTfBF3lNyplKkLJeB8YjKVTb1FPHGSy9sXfSdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!-- multi select -->
 	<script type="text/javascript" src="src/jquery.multi-select.js"></script>
 	<script src="data/data.js"></script>
 	<script src="src/index.js"></script>
 
-
+<script>
+	Split(['#split-0', '#code-right-container'], {
+		rowGutters: [{
+			track: 1,
+			element: document.querySelector('.gutter-row-1'),
+		}]
+	})
+	Split(['#code-all-container', '#python-area-container'],{direction: 'vertical'})</script>
 </body>
 
 </html>

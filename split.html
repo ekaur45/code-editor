@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-rows: 1fr 10px 1fr;
+            grid-template-columns: 1fr 10px 1fr;
+        }
+
+        .gutter-col {
+            grid-row: 1/-1;
+            cursor: col-resize;
+        }
+
+        .gutter-col-1 {
+            grid-column: 2;
+        }
+
+        .gutter-row {
+            grid-column: 1/-1;
+            cursor: row-resize;
+        }
+
+        .gutter-row-1 {
+            grid-row: 2;
+        }
+
+        .split {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .gutter {
+            background-color: #eee;
+            background-repeat: no-repeat;
+            background-position: 50%;
+        }
+
+        .gutter.gutter-horizontal {
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+            cursor: col-resize;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.6.2/split.min.js"
+        integrity="sha512-to2k78YjoNUq8+hnJS8AwFg/nrLRFLdYYalb18SlcsFRXavCOTfBF3lNyplKkLJeB8YjKVTb1FPHGSy9sXfSdg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div class="split" style="width: calc(100vw - 345px); height: 100vh;">
+        <div id="split-0"></div>
+        <div id="split-1">
+            <div id="split-2"></div>
+            <div id="split-3"></div>
+        </div>
+    </div>
+    <script>
+
+        Split(['#split-0', '#split-1'], {
+            rowGutters: [{
+                track: 1,
+                element: document.querySelector('.gutter-row-1'),
+            }]
+        })
+        Split(['#split-2', '#split-3'],{direction: 'vertical'})
+    </script>
+</body>
+
+</html>

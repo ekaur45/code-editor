@@ -42,7 +42,7 @@ var contextMenuOptions = {
 $(document).ready(__init);
 function __init() {
     __restrictions();
-    initResizableLayout();
+    //initResizableLayout();
     $('#language').multiSelect();
     $('#sanitise').multiSelect();
     $("#accordion").accordion({
