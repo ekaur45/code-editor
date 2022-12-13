@@ -297,6 +297,10 @@ function listeners() {
         $("#add-file-name").val('');
         $("#add-f").show();
     });
+    $("#close-file").on("click",function(){
+        $("#add-file-name").val('');
+        $("#add-f").hide();
+    });
     $("#add-file-confirm-btn").on("click",function(){
         if($("#add-file-name").val())
         {

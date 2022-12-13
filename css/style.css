@@ -220,12 +220,12 @@ a {
 	width: 100%;
 }
 
-.accordion-wrapper .head h3:before {
+/* .accordion-wrapper .head h3:before {
 	content: "\f054";
 	font-family: "Font Awesome 6 Pro";
 	font-weight: 900;
 	margin-right: 12px;
-}
+} */
 .accordion-wrapper .content{
 	height:calc(50% - 54px);
 	overflow-y: auto;	
