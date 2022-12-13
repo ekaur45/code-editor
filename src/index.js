@@ -1,9 +1,8 @@
-let ff = ["Dockerfile","build.sh","project.yaml","fuzz.cc"];
+let ff = ["test.py","Dockerfile","build.sh","project.yaml","fuzz.cc"];
 __editorConfig.addProject({name:"Project1"});
 __editorConfig.setCurrentProject("Project1");
 ff.forEach(x=>{
-    __editorConfig.addFile(x,`# ${x} file content`);
-    
+    __editorConfig.addFile(x,`# ${x} file content`);    
 })
 __editorConfig.addActiveFile(ff[0]);
 //#region  variabled
@@ -107,7 +106,18 @@ function initResizableLayout() {
     });
 }
 function createCodeMirror(content) {
+    let m = __modes['.c'];
     codeeditor.setValue(content);
+    if(__modes[activeTab.toLowerCase()]){
+    m = __modes[activeTab.toLowerCase()];
+    }else{
+        let arr = activeTab.toLowerCase().split('.');
+        if(__modes["."+arr[arr.length-1]]){
+            m = __modes["."+arr[arr.length-1]];
+        }
+    }
+    codeeditor.setOption("mode",m);
+    debugger
 }
 function initCodeEditor1() {
     codeeditor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -125,6 +135,7 @@ function initCodeEditor1() {
     codeeditor.on('change', (editor) => {
         const text = editor.doc.getValue()
         __editorConfig.setContent(activeTab,text);
+        
       });
 }
 
@@ -223,7 +234,7 @@ function initializeCodeEditor2() {
         lineNumbers: false,
         theme: "default",
         extraKeys: { "Enter": "newlineAndIndentContinueMarkdownList" }
-    });
+    });    
 }
 
 function confirmDialog() {
