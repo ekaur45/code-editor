@@ -6,6 +6,7 @@
 	<meta name=viewport content="width=device-width, initial-scale=1">
 	<title>code editor</title>
 
+	<link rel="stylesheet" href="css/responsive.css">
 	<!-- icon -->
 	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.1/css/all.css">
 	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.1/css/sharp-solid.css">
@@ -17,7 +18,6 @@
 	<!-- style -->
 	<link rel="stylesheet" type="text/css" href="css/multi-select.css">
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
@@ -29,12 +29,12 @@
 			<div class="accordion-wrapper">
 				<div class="head">
 					<h3>FILES</h3>
-					<p id="addFileBtn"><i class="fa-sharp fa-solid fa-plus" ></i></p>
+					<p id="addFileBtn"><i class="fa-sharp fa-solid fa-plus"></i></p>
 				</div>
 				<div class="content">
-					<ul id="file-list">					
+					<ul id="file-list">
 					</ul>
-					
+
 					<!-- The Modal -->
 					<div id="remove-f" class="modal">
 
@@ -44,7 +44,8 @@
 								<h2>Deleting a file</h2>
 							</div>
 							<div class="m-body">
-								<p>Are you sure want to remove &nbsp;<span id="deleting-file-name">#filename#</span>&nbsp; file?</p>
+								<p>Are you sure want to remove &nbsp;<span
+										id="deleting-file-name">#filename#</span>&nbsp; file?</p>
 
 							</div>
 							<div class="m-foot">
@@ -62,12 +63,12 @@
 								<h2>Add a file</h2>
 							</div>
 							<div class="m-body">
-								<input class="add-file-input" id="add-file-name" placeholder="file name"/>
+								<input class="add-file-input" id="add-file-name" placeholder="file name" />
 
 							</div>
 							<div class="m-foot">
-								<button class="close2">Cancel</button><button type="submit"
-									class="close3 remove-btn" id="add-file-confirm-btn">Add</button>
+								<button class="close2">Cancel</button><button type="submit" class="close3 remove-btn"
+									id="add-file-confirm-btn">Add</button>
 							</div>
 						</div>
 
@@ -83,7 +84,7 @@
 					</ul>
 				</div>
 			</div>
-		
+
 			<!-- The Modal -->
 			<div id="myModal" class="modal">
 
@@ -154,7 +155,7 @@
 					<a href="#" class="light active" onclick="myFunction()"><i
 							class="fa-sharp fa-solid fa-sun-bright"></i> Light</a><a href="#" class="dark"
 						onclick="myFunction()"><i class="fa-solid fa-moon"></i> Dark</a>
-						<div class="bg-light-switch"></div>
+					<div class="bg-light-switch"></div>
 				</div>
 
 				<div class="social-icon">
@@ -247,7 +248,7 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 			<div class="light-switch">
 				<a href="#" class="light active" onclick="myFunction()"><i class="fa-sharp fa-solid fa-sun-bright"></i>
 					Light</a><a href="#" class="dark" onclick="myFunction()"><i class="fa-solid fa-moon"></i> Dark</a>
-					
+
 			</div>
 
 			<div class="social-icon">
@@ -267,12 +268,12 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 				<h2>Rename a file</h2>
 			</div>
 			<div class="m-body">
-				<input class="add-file-input" id="rename-file-name" placeholder="file name"/>
+				<input class="add-file-input" id="rename-file-name" placeholder="file name" />
 
 			</div>
 			<div class="m-foot">
-				<button  id="rename-file-cancel-btn">Cancel</button><button type="submit"
-					class="close3 remove-btn" id="rename-file-confirm-btn">Rename</button>
+				<button id="rename-file-cancel-btn">Cancel</button><button type="submit" class="close3 remove-btn"
+					id="rename-file-confirm-btn">Rename</button>
 			</div>
 		</div>
 	</div>
@@ -283,19 +284,36 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 	<script src='https://unpkg.com/codemirror@5.32.0/lib/codemirror.js'></script>
 	<script src='https://unpkg.com/codemirror@5.32.0/mode/javascript/javascript.js'></script>
 	<script src='https://unpkg.com/codemirror@5.32.0/mode/markdown/markdown.js'></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+		integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/clike/clike.min.js" integrity="sha512-l8ZIWnQ3XHPRG3MQ8+hT1OffRSTrFwrph1j1oc1Fzc9UKVGef5XN9fdO0vm3nW0PRgQ9LJgck6ciG59m69rvfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/dockerfile/dockerfile.min.js" integrity="sha512-ch10u8TFk+imeVP39rlig1uTyAQxBafVS7bFfunMBg0xFcgAxJyuGtwxYfc+0Gb+ajeGrB/E8FAnww6BLjizAw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/yaml/yaml.min.js" integrity="sha512-+aXDZ93WyextRiAZpsRuJyiAZ38ztttUyO/H3FZx4gOAOv4/k9C6Um1CvHVtaowHZ2h7kH0d+orWvdBLPVwb4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/go/go.min.js" integrity="sha512-dh8pBX6P5WZ63k5cSrF64G2QqKAHnLCjnP7vZOmz4peYWedM5lXyH/AqpUldSFBtubTK54kmwN6XAn/T2sVDVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/javascript/javascript.min.js" integrity="sha512-I6CdJdruzGtvDyvdO4YsiAq+pkWf2efgd1ZUSK2FnM/u2VuRASPC7GowWQrWyjxCZn6CT89s3ddGI+be0Ak9Fg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/swift/swift.min.js" integrity="sha512-KboFwQ+TWkkbWPaPoADuxTYNLkcFzhckndX0mquRYdRFT6Wn8evoAqpTqTVA9b4ayrH4KjX3WZgwHGHq6l1Ruw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/clike/clike.min.js"
+		integrity="sha512-l8ZIWnQ3XHPRG3MQ8+hT1OffRSTrFwrph1j1oc1Fzc9UKVGef5XN9fdO0vm3nW0PRgQ9LJgck6ciG59m69rvfg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/dockerfile/dockerfile.min.js"
+		integrity="sha512-ch10u8TFk+imeVP39rlig1uTyAQxBafVS7bFfunMBg0xFcgAxJyuGtwxYfc+0Gb+ajeGrB/E8FAnww6BLjizAw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/yaml/yaml.min.js"
+		integrity="sha512-+aXDZ93WyextRiAZpsRuJyiAZ38ztttUyO/H3FZx4gOAOv4/k9C6Um1CvHVtaowHZ2h7kH0d+orWvdBLPVwb4g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/go/go.min.js"
+		integrity="sha512-dh8pBX6P5WZ63k5cSrF64G2QqKAHnLCjnP7vZOmz4peYWedM5lXyH/AqpUldSFBtubTK54kmwN6XAn/T2sVDVQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/javascript/javascript.min.js"
+		integrity="sha512-I6CdJdruzGtvDyvdO4YsiAq+pkWf2efgd1ZUSK2FnM/u2VuRASPC7GowWQrWyjxCZn6CT89s3ddGI+be0Ak9Fg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/swift/swift.min.js"
+		integrity="sha512-KboFwQ+TWkkbWPaPoADuxTYNLkcFzhckndX0mquRYdRFT6Wn8evoAqpTqTVA9b4ayrH4KjX3WZgwHGHq6l1Ruw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!-- multi select -->
 	<script type="text/javascript" src="src/jquery.multi-select.js"></script>
 	<script src="data/data.js"></script>

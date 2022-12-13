@@ -36,7 +36,7 @@ a {
 
 .sidebar {
 	background: #fafafa;
-	width: 18%;
+	width: 18vw !important;
 	height: 100vh;
 	overflow: auto;
 	position: relative;

@@ -87,11 +87,18 @@ function __restrictions() {
     })
 }
 function initResizableLayout() {
+    $(window).on("resize",function(e){
+        // console.log({e})
+        if(e.target == window){
+                document.getElementById('code-right-container').style="width:100px !important;";
+                document.getElementById('python-area-container').style="width:100px !important;";
+        }
+    })
     $(".code-left").resizable({
         handles: 'e',
         resize: function (event, ui) {
             var width = $(ui.element).width();
-            document.getElementById('code-right-container').style = `width:calc(82% - ${width}px) !important;`;
+            document.getElementById('code-right-container').style = `width:calc(82vw - ${width}px) !important;`;
             //console.log({event,ui});
         }
     });
@@ -117,7 +124,6 @@ function createCodeMirror(content) {
         }
     }
     codeeditor.setOption("mode",m);
-    debugger
 }
 function initCodeEditor1() {
     codeeditor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -228,7 +234,7 @@ function RenderProjects(){
 function initializeCodeEditor2() {
     var editor = CodeMirror.fromTextArea(document.getElementById("code-right"), {
         mode: {
-            name: "python",
+            name: "markdown",
             highlightFormatting: true
         },
         lineNumbers: false,
