@@ -87,6 +87,31 @@ function __restrictions() {
     })
 }
 function initResizableLayout() {
+    $(window).on('resize',function(e){
+        if(e.target == window){
+            $(".code-left").resizable("destroy");
+            $("#code-all-container").resizable("destroy");
+            $(".code-left").css({"width":"48%"});
+            $(".code-right").css({"width":"40%"});
+            $(".code-left").resizable({
+                handles: 'e',
+                resize: function (event, ui) {
+                    var width = $(ui.element).width();
+                    document.getElementById('code-right-container').style = `width:calc(calc(100% - 353px)% - ${width}px) !important;`;
+                    //console.log({event,ui});
+                }
+            });
+            $("#code-all-container").resizable({
+                handles: 's',
+                resize: function (event, ui) {
+                    var height = $(ui.element).height();
+                    height += 59;
+                    document.getElementById('python-area-container').style = `height:calc(100vh - ${height}px) !important;`;
+                    //console.log({event,ui});
+                }
+            });
+        }
+    })
     $(".code-left").resizable({
         handles: 'e',
         resize: function (event, ui) {
@@ -117,7 +142,6 @@ function createCodeMirror(content) {
         }
     }
     codeeditor.setOption("mode",m);
-    debugger
 }
 function initCodeEditor1() {
     codeeditor = CodeMirror.fromTextArea(document.getElementById("code"), {
