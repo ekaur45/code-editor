@@ -1,8 +1,8 @@
-let ff = ["test.py","Dockerfile","build.sh","project.yaml","fuzz.cc"];
-__editorConfig.addProject({name:"Project1"});
+let ff = ["test.py", "Dockerfile", "build.sh", "project.yaml", "fuzz.cc"];
+__editorConfig.addProject({ name: "Project1" });
 __editorConfig.setCurrentProject("Project1");
-ff.forEach(x=>{
-    __editorConfig.addFile(x,`# ${x} file content`);    
+ff.forEach(x => {
+    __editorConfig.addFile(x, `# ${x} file content`);
 })
 __editorConfig.addActiveFile(ff[0]);
 //#region  variabled
@@ -10,32 +10,36 @@ var activeTab = __editorConfig.activeProject.files[0].name;
 var codeeditor = null;
 var modal2 = document.getElementById("remove-f");
 var contextMenuOptions = {
-    foo: {name: "Rename", callback: function(key, opt){
-        let fileName = $(opt.$trigger).children().data("file_name");
-        openRenameDialog(fileName).then((x)=>{
-            if(x.success==true){
-                __editorConfig.renameFile(fileName,x.name);
-                if(fileName == activeTab) activeTab = x.name;
-                RenderFileList();
-                RenderTabs();
-            }
-        })
-    }},
-    bar: {name: "Delete", callback: function(key, opt){
-        let fileName = $(opt.$trigger).children().data("file_name");
-        console.log({fileName});
-        openDeleteConfirmDialog(fileName).then(x=>{
-            if(x==true){
-                __editorConfig.deleteFile(fileName);
-                if(fileName==activeTab){
-                    if(__editorConfig.activeProject.files&&__editorConfig.activeProject.files.length>0)
-                        activeTab = __editorConfig.activeProject.files[0].name
+    foo: {
+        name: "Rename", callback: function (key, opt) {
+            let fileName = $(opt.$trigger).children().data("file_name");
+            openRenameDialog(fileName).then((x) => {
+                if (x.success == true) {
+                    __editorConfig.renameFile(fileName, x.name);
+                    if (fileName == activeTab) activeTab = x.name;
+                    RenderFileList();
+                    RenderTabs();
                 }
-                RenderTabs();
-                RenderFileList();
-            }
-        })
-     }}
+            })
+        }
+    },
+    bar: {
+        name: "Delete", callback: function (key, opt) {
+            let fileName = $(opt.$trigger).children().data("file_name");
+            console.log({ fileName });
+            openDeleteConfirmDialog(fileName).then(x => {
+                if (x == true) {
+                    __editorConfig.deleteFile(fileName);
+                    if (fileName == activeTab) {
+                        if (__editorConfig.activeProject.files && __editorConfig.activeProject.files.length > 0)
+                            activeTab = __editorConfig.activeProject.files[0].name
+                    }
+                    RenderTabs();
+                    RenderFileList();
+                }
+            })
+        }
+    }
 }
 
 //#endregion
@@ -54,10 +58,10 @@ function __init() {
     RenderProjects();
     RenderFileList();
     RenderTabs();
-    
+
 }
-function __initContextMenu(){
-    
+function __initContextMenu() {
+
     $.contextMenu({
         // define which elements trigger this menu
         selector: "#file-list li",
@@ -87,31 +91,58 @@ function __restrictions() {
     })
 }
 function initResizableLayout() {
-    $(window).on('resize',function(e){
-        if(e.target == window){
-            $(".code-left").resizable("destroy");
-            $("#code-all-container").resizable("destroy");
-            $(".code-left").css({"width":"48%"});
-            $(".code-right").css({"width":"40%"});
-            $(".code-left").resizable({
-                handles: 'e',
-                resize: function (event, ui) {
-                    var width = $(ui.element).width();
-                    document.getElementById('code-right-container').style = `width:calc(calc(100% - 353px)% - ${width}px) !important;`;
-                    //console.log({event,ui});
-                }
-            });
-            $("#code-all-container").resizable({
-                handles: 's',
-                resize: function (event, ui) {
-                    var height = $(ui.element).height();
-                    height += 59;
-                    document.getElementById('python-area-container').style = `height:calc(100vh - ${height}px) !important;`;
-                    //console.log({event,ui});
-                }
-            });
-        }
-    })
+    // $(window).on('resize', function (e) {
+    //     if (e.target == window) {
+    //         if (screen.availWidth == window.innerWidth) {
+    //             $(".code-left").removeAttr("style");
+    //             $(".code-right").removeAttr("style");
+    //             $(".code-left").resizable("destroy");
+    //             $("#code-all-container").resizable("destroy");
+    //             $(".code-left").css({ "width": "48%" });
+    //             $(".code-right").css({ "width": "40%" });
+    //             $(".code-left").resizable({
+    //                 handles: 'e',
+    //                 resize: function (event, ui) {
+    //                     var width = $(ui.element).width();
+    //                     document.getElementById('code-right-container').style = `width:calc(calc(100% - 353px)% - ${width}px) !important;`;
+    //                     //console.log({event,ui});
+    //                 }
+    //             });
+    //             $("#code-all-container").resizable({
+    //                 handles: 's',
+    //                 resize: function (event, ui) {
+    //                     var height = $(ui.element).height();
+    //                     height += 59;
+    //                     document.getElementById('python-area-container').style = `height:calc(100vh - ${height}px) !important;`;
+    //                     //console.log({event,ui});
+    //                 }
+    //             });
+    //         }
+    //         else {
+    //             $(".code-left").resizable("destroy");
+    //             $("#code-all-container").resizable("destroy");
+    //             $(".code-left").css({ "width": "48%" });
+    //             $(".code-right").css({ "width": "40%" });
+    //             $(".code-left").resizable({
+    //                 handles: 'e',
+    //                 resize: function (event, ui) {
+    //                     var width = $(ui.element).width();
+    //                     document.getElementById('code-right-container').style = `width:calc(calc(100% - 353px)% - ${width}px) !important;`;
+    //                     //console.log({event,ui});
+    //                 }
+    //             });
+    //             $("#code-all-container").resizable({
+    //                 handles: 's',
+    //                 resize: function (event, ui) {
+    //                     var height = $(ui.element).height();
+    //                     height += 59;
+    //                     document.getElementById('python-area-container').style = `height:calc(100vh - ${height}px) !important;`;
+    //                     //console.log({event,ui});
+    //                 }
+    //             });
+    //         }
+    //     }
+    // })
     $(".code-left").resizable({
         handles: 'e',
         resize: function (event, ui) {
@@ -133,15 +164,15 @@ function initResizableLayout() {
 function createCodeMirror(content) {
     let m = __modes['.c'];
     codeeditor.setValue(content);
-    if(__modes[activeTab.toLowerCase()]){
-    m = __modes[activeTab.toLowerCase()];
-    }else{
+    if (__modes[activeTab.toLowerCase()]) {
+        m = __modes[activeTab.toLowerCase()];
+    } else {
         let arr = activeTab.toLowerCase().split('.');
-        if(__modes["."+arr[arr.length-1]]){
-            m = __modes["."+arr[arr.length-1]];
+        if (__modes["." + arr[arr.length - 1]]) {
+            m = __modes["." + arr[arr.length - 1]];
         }
     }
-    codeeditor.setOption("mode",m);
+    codeeditor.setOption("mode", m);
 }
 function initCodeEditor1() {
     codeeditor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -151,16 +182,16 @@ function initCodeEditor1() {
         },
         lineNumbers: true,
         theme: "default",
-        update:function(e,a){
-            console.log({e,a});
+        update: function (e, a) {
+            console.log({ e, a });
         },
         extraKeys: { "Enter": "newlineAndIndentContinueMarkdownList" }
     });
     codeeditor.on('change', (editor) => {
         const text = editor.doc.getValue()
-        __editorConfig.setContent(activeTab,text);
-        
-      });
+        __editorConfig.setContent(activeTab, text);
+
+    });
 }
 
 
@@ -175,9 +206,9 @@ function AddFileClickListener() {
     });
     $('.project_list').on('click', function () {
         let project = $(this).data("project_name");
-        __editorConfig.setCurrentProject(project);        
-        if(__editorConfig.activeProject.files&&__editorConfig.activeProject.files.length>0)
-        activeTab = __editorConfig.activeProject.files[0].name;
+        __editorConfig.setCurrentProject(project);
+        if (__editorConfig.activeProject.files && __editorConfig.activeProject.files.length > 0)
+            activeTab = __editorConfig.activeProject.files[0].name;
 
         RenderFileList();
         RenderTabs();
@@ -201,7 +232,7 @@ function RenderTabs() {
             html += `<a href="#" data-file_name='${activeFiles[i]}' ${isActive ? 'class="active file_list"' : 'class="file_list"'}><i class="fa-solid fa-file-code"></i><span>${activeFiles[i]}</span>${true ? '<i class="fa-sharp fa-solid fa-xmark file-fa-xmark" ></i>' : ''}</a>`
         }
         var activeTabFile = __editorConfig.activeProject.files.filter(x => x.name === activeTab);
-        if (activeTabFile &&activeTabFile.length>0) {
+        if (activeTabFile && activeTabFile.length > 0) {
             createCodeMirror(activeTabFile[0].content)
         }
         $("#files-name").html(html);
@@ -226,12 +257,12 @@ function RenderFileList() {
         html += `<li><a href="#" data-file_name='${files[i].name}' ${isActive ? 'class="active file_list"' : 'class="file_list"'}><i class="fa-solid fa-file-code"></i> ${files[i].name} ${false ? '<i class="fa-solid fa-xmark remove-file" id="remove"></i>' : ''}</a></li>`
     }
     $("#file-list").html(html);
-    
+
     AddFileClickListener();
     __initContextMenu();
-  
+
 }
-function RenderProjects(){
+function RenderProjects() {
     let projects = __editorConfig.projects;
     var html = "";
     if (!(projects && projects.length)) {
@@ -258,7 +289,7 @@ function initializeCodeEditor2() {
         lineNumbers: false,
         theme: "default",
         extraKeys: { "Enter": "newlineAndIndentContinueMarkdownList" }
-    });    
+    });
 }
 
 function confirmDialog() {
@@ -286,32 +317,32 @@ function myFunction() {
     var element = document.querySelector('.lightmode');
     element.classList.toggle("dark-mode");
 }
-function openRenameDialog(name){
+function openRenameDialog(name) {
     $("#rename-file-name").val(name);
-    return new Promise((resolve,reject)=>{
-       $("#rename-f").modal("show");
-       $("#rename-file-confirm-btn").on("click",function(){
-           resolve({success:true,name:$("#rename-file-name").val()})
-           $("#rename-f").modal("hide");
-       })
-       $("#rename-file-cancel-btn").on("click",function(){
-           resolve({success:false,name:$("#rename-file-name").val()})
-           $("#rename-f").modal("hide");
-       })
+    return new Promise((resolve, reject) => {
+        $("#rename-f").modal("show");
+        $("#rename-file-confirm-btn").on("click", function () {
+            resolve({ success: true, name: $("#rename-file-name").val() })
+            $("#rename-f").modal("hide");
+        })
+        $("#rename-file-cancel-btn").on("click", function () {
+            resolve({ success: false, name: $("#rename-file-name").val() })
+            $("#rename-f").modal("hide");
+        })
     })
 }
-function openDeleteConfirmDialog(n){
+function openDeleteConfirmDialog(n) {
     $("#deleting-file-name").html(n);
-    return new Promise((resolve,reject)=>{
-       $("#remove-f").modal("show");
-       $("#delete-cancel-btn").on("click",function(){
-           resolve(false)
-           $("#remove-f").modal("hide");
-       })
-       $("#delete-confirm-btn").on("click",function(){
-           resolve(true)
-           $("#remove-f").modal("hide");
-       })
+    return new Promise((resolve, reject) => {
+        $("#remove-f").modal("show");
+        $("#delete-cancel-btn").on("click", function () {
+            resolve(false)
+            $("#remove-f").modal("hide");
+        })
+        $("#delete-confirm-btn").on("click", function () {
+            resolve(true)
+            $("#remove-f").modal("hide");
+        })
     })
 }
 function listeners() {
@@ -324,21 +355,20 @@ function listeners() {
         $(".light").addClass("active");
         $(".dark").removeClass("active");
     });
- 
-    $("#myBtn").on("click",function(){
+
+    $("#myBtn").on("click", function () {
         $("#myModal").show();
     });
-    $("#addFileBtn").on("click",function(){
+    $("#addFileBtn").on("click", function () {
         $("#add-file-name").val('');
         $("#add-f").show();
     });
-    $("#close-file").on("click",function(){
+    $("#close-file").on("click", function () {
         $("#add-file-name").val('');
         $("#add-f").hide();
     });
-    $("#add-file-confirm-btn").on("click",function(){
-        if($("#add-file-name").val())
-        {
+    $("#add-file-confirm-btn").on("click", function () {
+        if ($("#add-file-name").val()) {
             __editorConfig.addFile($("#add-file-name").val());
             __editorConfig.addActiveFile($("#add-file-name").val());
             activeTab = $("#add-file-name").val();
@@ -347,30 +377,30 @@ function listeners() {
             $("#add-f").hide();
         }
     });
-    $("#createFileForm").on("submit",function(e){
+    $("#createFileForm").on("submit", function (e) {
         e.preventDefault();
-        var __fileConfig=$(e.target).serializeArray();
-        var fileName = __fileConfig.filter(x=>x.name == "name")[0];
-        __editorConfig.addProject({name:fileName.value});
-        __editorConfig.setCurrentProject(fileName.value);        
-        if(__editorConfig.activeProject.files&&__editorConfig.activeProject.files.length>0)
+        var __fileConfig = $(e.target).serializeArray();
+        var fileName = __fileConfig.filter(x => x.name == "name")[0];
+        __editorConfig.addProject({ name: fileName.value });
+        __editorConfig.setCurrentProject(fileName.value);
+        if (__editorConfig.activeProject.files && __editorConfig.activeProject.files.length > 0)
             activeTab = __editorConfig.activeProject.files[0].name;
         RenderProjects();
         RenderFileList();
         RenderTabs();
-        
+
         $("#myModal").hide();
     });
-    $(".content").on("mouseenter",function(){
+    $(".content").on("mouseenter", function () {
         $(this).addClass("content-hover");
     })
-    $(".content").on("mouseleave",function(){
+    $(".content").on("mouseleave", function () {
         $(this).removeClass("content-hover");
     })
-    $("#files-name").on("mouseenter",function(){
+    $("#files-name").on("mouseenter", function () {
         $(this).addClass("content-hover");
     })
-    $("#files-name").on("mouseleave",function(){
+    $("#files-name").on("mouseleave", function () {
         $(this).removeClass("content-hover");
     })
 }
