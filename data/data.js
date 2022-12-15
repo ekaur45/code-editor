@@ -2,7 +2,7 @@ var __modes = {
     '.c':'text/x-c', // c language
     '.cpp':'text/x-c++src', // c++ 
     '.py':'text/x-python',
-    'dockerfile':'text/x-dockerfile',
+    'dockerfile':'text/x-yaml',
     '.yml':'text/x-yaml',
     '.go':'text/x-go',
     '.js':'text/javascript',
