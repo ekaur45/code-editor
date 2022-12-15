@@ -1,4 +1,4 @@
-let ff = ["test.py", "Dockerfile", "build.sh", "project.yaml", "fuzz.cc"];
+let ff = ["Dockerfile", "build.sh", "project.yaml", "fuzz.cc"];
 __editorConfig.addProject({ name: "Project1" });
 __editorConfig.setCurrentProject("Project1");
 ff.forEach(x => {
